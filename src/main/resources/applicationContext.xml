@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="serviceFactory" class="com.learning.spring.config.CustomBeanFactory">
+        <property name="anotherService" ref="anotherService"/>
+    </bean>
+    <bean id="userService" factory-bean="serviceFactory" factory-method="getServiceImpl" scope="prototype">
+        <constructor-arg value="0"/>
+    </bean>
+    <bean class="com.learning.spring.config.TenantLookupProvider" id="tenantLookupProvider"/>
+    <bean class="com.learning.spring.service.AnotherServiceImpl" id="anotherService"/>
+</beans>
